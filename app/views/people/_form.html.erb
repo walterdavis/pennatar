@@ -25,11 +25,11 @@
   </div>
   <div class="field">
     <%= f.label :photo_key %><br>
-    <%= f.text_field :photo_key %>
+    <output><%= @person.photo_key %></output>
   </div>
   <div class="field">
     <%= f.label :selected_portrait_id %><br>
-    <%= f.collection_select :selected_portrait_id, @person.portraits, :id, :img %>
+    <%= f.collection_radio_buttons :selected_portrait_id, @person.portraits, :id, :tiny_icon %>
   </div>
   <div class="actions">
     <%= f.submit %>

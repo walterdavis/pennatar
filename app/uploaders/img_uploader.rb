@@ -17,14 +17,36 @@ class ImgUploader < CarrierWave::Uploader::Base
   end
   
   process :convert => :jpg
+  
+  version :large do
+    resize_to_limit(800, 800)
+  end
+
+  version :thumb do
+    process :crop
+    resize_to_fill(400, 400)
+  end
+
+  def crop
+    if model.crop_x.present?
+      resize_to_limit(800, 800)
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop!(x, y, w, h)
+      end
+    end
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+  def default_url
+    # For Rails 3.1+ asset pipeline compatibility:
+    ActionController::Base.helpers.asset_path("images/" + [version_name, "default.png"].compact.join('_'))
+  
+    # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  end
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]

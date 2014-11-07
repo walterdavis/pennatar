@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   resources :people
 
-  resources :portraits
+  resources :portraits do
+    member do
+      get 'crop'
+    end
+  end
   
-  get ':photo_key', to: 'people#pennatar'
+  get '/apps/my/images/faculty_pics/:photo_key', to: 'people#pennatar'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

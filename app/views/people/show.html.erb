@@ -17,15 +17,13 @@
 
 <p>
   <strong>Photo key:</strong>
-  <%= @person.photo_key %>
+  <%= link_to(@person.photo_key, "/apps/my/images/faculty_pics/#{@person.photo_key}.jpg") %>
 </p>
 
 <p>
-  <strong>Selected photo:</strong>
-  <%= image_tag( @person.selected_portrait.img.url ) if @person.selected_portrait_id? %>
+  <%= link_to( image_tag( @person.selected_portrait.img.url(:thumb) ), edit_person_path(@person) ) if @person.selected_portrait_id? %>
 </p>
 <p>
-  <%= link_to 'Add portrait', new_portrait_path(person_id: @person.id) %>
-</p>
+  <%= link_to 'Add portrait', new_portrait_path(person_id: @person.id) %> |
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

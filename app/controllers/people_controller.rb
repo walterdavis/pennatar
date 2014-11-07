@@ -14,7 +14,12 @@ class PeopleController < ApplicationController
   
   def pennatar
     @person = Person.find_by photo_key: params[:photo_key]
-    send_file @person.selected_portrait.img.path, type: 'image/jpeg', disposition: 'inline'
+    if @person.selected_portrait_id?
+      img = @person.selected_portrait.img.thumb.path
+    else
+      img = File.join(Rails.root, 'public/images/default.jpg')
+    end
+    send_file img, type: 'image/jpeg', disposition: 'inline'
   end
 
   # GET /people/new

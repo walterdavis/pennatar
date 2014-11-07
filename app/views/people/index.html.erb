@@ -18,8 +18,8 @@
         <td><%= person.first_name %></td>
         <td><%= person.last_name %></td>
         <td><%= person.pennid %></td>
-        <td><%= person.photo_key %></td>
-        <td><%= person.selected_portrait %></td>
+        <td><%= link_to(person.photo_key, "/apps/my/images/faculty_pics/#{person.photo_key}.jpg") %></td>
+        <td><%= image_tag(person.selected_portrait.img_url(:thumb), class: 'tiny') if person.selected_portrait_id? %></td>
         <td><%= link_to 'Show', person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
         <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
