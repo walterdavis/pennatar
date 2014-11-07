@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag @portrait.img.url %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @portrait.person_id %>
+</p>
+
+<%= link_to 'Edit', edit_portrait_path(@portrait) %> |
+<%= link_to 'Back', portraits_path %>

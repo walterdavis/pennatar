@@ -1,0 +1,27 @@
+<h1>Listing portraits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Person.references</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @portraits.each do |portrait| %>
+      <tr>
+        <td><%= portrait.img %></td>
+        <td><%= portrait.person_id %></td>
+        <td><%= link_to 'Show', portrait %></td>
+        <td><%= link_to 'Edit', edit_portrait_path(portrait) %></td>
+        <td><%= link_to 'Destroy', portrait, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Portrait', new_portrait_path %>

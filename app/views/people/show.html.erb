@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @person.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @person.last_name %>
+</p>
+
+<p>
+  <strong>Pennid:</strong>
+  <%= @person.pennid %>
+</p>
+
+<p>
+  <strong>Photo key:</strong>
+  <%= @person.photo_key %>
+</p>
+
+<p>
+  <strong>Selected photo:</strong>
+  <%= image_tag( @person.selected_portrait.img.url ) if @person.selected_portrait_id? %>
+</p>
+<p>
+  <%= link_to 'Add portrait', new_portrait_path(person_id: @person.id) %>
+</p>
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>
